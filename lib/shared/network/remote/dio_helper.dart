@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class DioHelper{
   static Dio dio;
@@ -7,8 +7,7 @@ class DioHelper{
   static init(){
     dio = Dio(
      BaseOptions(
-       baseUrl: 'https://student.valuxapps.com/api/',
-       // baseUrl: 'https://newsapi.org/',
+       baseUrl: 'http://192.168.0.199:8000/api',
        // headers: {
        //   'Content-Type':'application/json',
        // },
@@ -25,7 +24,7 @@ class DioHelper{
 }) async {
     dio.options.headers =
     {
-      'Content-Type':'application/json',
+      'Accept':'application/json',
       'lang':lang,
       'Authorization' :token??'',
     };
@@ -44,7 +43,7 @@ class DioHelper{
 })async{
     dio.options.headers =
     {
-      'Content-Type':'application/json',
+      'Accept':'application/json',
       'lang':lang,
       'Authorization' :token??'',
     };
@@ -64,7 +63,7 @@ class DioHelper{
   })async{
     dio.options.headers =
     {
-      'Content-Type':'application/json',
+      'Accept':'application/json',
       'lang':lang,
       'Authorization' :token??'',
     };

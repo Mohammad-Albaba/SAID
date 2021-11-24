@@ -38,7 +38,7 @@ dependencies:
   flutter_bloc: ^7.0.0
   dio: ^4.0.0
   hexcolor: ^2.0.3
-  shared_preferences: ^2.0.6
+  shared_preferences: ^2.0.2
   webview_flutter: ^2.0.8
   smooth_page_indicator: ^0.2.3
   carousel_slider: ^4.0.0
@@ -52,11 +52,18 @@ dependencies:
   url_launcher: ^6.0.9
   share: ^2.0.4
   video_player: ^2.1.15
-  cached_network_image: ^3.1.0
+  cached_network_image: ^3.1.0+1
   firebase_messaging: ^10.0.0
   avoid_keyboard: ^0.3.0
   progress_indicator: ^0.2.0
-  geolocator: ^7.6.2
+  country_code_picker: ^2.0.2
+  pinput: ^1.2.1
+  google_maps_flutter: ^2.1.0
+  rflutter_alert: ^2.0.2
+  audioplayers: ^0.20.1
+  path_provider: ^2.0.2
+  permission_handler: ^8.1.4+1
+
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +82,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/
+    - assets/fonts/
 
   fonts:
     - family: Jannah

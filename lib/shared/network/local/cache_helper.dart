@@ -12,11 +12,11 @@ class CacheHelper
     sharedPreferences = await SharedPreferences.getInstance();
   }
   //  That is mode to app (NewsApp)
-  static Future<bool> putBoolean({
+  static Future<bool> putData({
     @required String key,
-    @required bool value,
+    @required String value,
    })async{
-    return await sharedPreferences.setBool(key, value);
+    return await sharedPreferences.setString(key, value);
    }
 
   // static bool getBoolean({
@@ -50,4 +50,9 @@ class CacheHelper
   })async{
    return await sharedPreferences.remove(key);
   }
+
+  static Future<bool> clearData() async{
+    return await sharedPreferences.clear();
+  }
+
   }
