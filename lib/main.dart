@@ -8,14 +8,12 @@ import 'package:requset/layout/cubit/states.dart';
 import 'package:requset/layout/home_layout.dart';
 import 'package:requset/modules/login/cubit/cubit.dart';
 import 'package:requset/modules/login/loginScreen.dart';
-import 'package:requset/modules/login/completeLogin_Screen.dart';
 import 'package:requset/shared/bloc_observer.dart';
 import 'package:requset/shared/components/constant.dart';
 import 'package:requset/shared/network/local/cache_helper.dart';
 import 'package:requset/shared/network/remote/dio_helper.dart';
 
-void main() async
-{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
@@ -33,9 +31,9 @@ void main() async
   Widget widget;
   token = CacheHelper.getData(key: 'token');
   //print('Token ' + token);
-  if(token != null){
+  if (token != null) {
     widget = HomeLayout();
-  }else{
+  } else {
     widget = LoginScreen();
   }
   runApp(MyApp());
@@ -49,7 +47,6 @@ class MyApp extends StatelessWidget {
     this.startWidget,
   });
 
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -62,11 +59,11 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state){},
-        builder: (context, state){
-          return  MaterialApp(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return MaterialApp(
             debugShowCheckedModeBanner: false,
-             home: HomeLayout(),
+            home: HomeLayout(),
             //home: startWidget,
           );
         },
@@ -74,4 +71,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
