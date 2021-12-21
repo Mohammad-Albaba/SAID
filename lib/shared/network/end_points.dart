@@ -5,3 +5,5 @@ const COMPLETE_LOGIN = '/user';
 const PROFILE = '/user/profile';
 
 const LOGOUT = '/auth/logout';
+
+const REQUEST = '/order/create';

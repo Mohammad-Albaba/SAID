@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:requset/orders_Screen.dart';
-import 'package:requset/requests_Screen.dart';
+
+import 'modules/orders_Screen.dart';
+import 'modules/requests_Screen.dart';
 
 class HomeScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -18,33 +18,39 @@ class HomeScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  SizedBox(height: 16.0,),
+                  SizedBox(
+                    height: 16.0,
+                  ),
                   Text(
                     'S A I D',
                     style: TextStyle(
                       color: Colors.blue,
                       fontFamily: 'Jannah',
                       fontWeight: FontWeight.bold,
-                    ),),
+                    ),
+                  ),
                   Spacer(),
                   IconButton(
                     color: Colors.black,
-                    icon: Icon(Icons.notifications_none_outlined, size: 30.0,),
-                    onPressed: (){},
+                    icon: Icon(
+                      Icons.notifications_none_outlined,
+                      size: 30.0,
+                    ),
+                    onPressed: () {},
                   ),
-
                   CircleAvatar(
                     radius: 20.0,
                     child: CircleAvatar(
                       radius: 20.0,
-                      backgroundImage:
-                      NetworkImage('https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=338&ext=jpg'),
+                      backgroundImage: NetworkImage(
+                          'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=338&ext=jpg'),
                     ),
                   ),
-
                 ],
               ),
-              SizedBox(height: 28.0,),
+              SizedBox(
+                height: 28.0,
+              ),
               Container(
                 height: 35.0,
                 width: MediaQuery.of(context).size.width,
@@ -64,16 +70,13 @@ class HomeScreen extends StatelessWidget {
                   labelPadding: EdgeInsets.symmetric(horizontal: 30.0),
                   isScrollable: false,
                   indicator: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.blue,
-                          width: 2.0
-                      ),
-                      borderRadius: BorderRadius.circular(9.0), // Creates border
-                      color: Colors.white
-                  ),
+                      border: Border.all(color: Colors.blue, width: 2.0),
+                      borderRadius:
+                          BorderRadius.circular(9.0), // Creates border
+                      color: Colors.white),
                   tabs: [
                     Container(
-                      width :MediaQuery.of(context).size.width/2,
+                      width: MediaQuery.of(context).size.width / 2,
                       child: Tab(
                         child: Text(
                           'Requests',
@@ -85,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      width :MediaQuery.of(context).size.width/2,
+                      width: MediaQuery.of(context).size.width / 2,
                       child: Tab(
                         child: Text(
                           'Orders',
@@ -104,13 +107,11 @@ class HomeScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-             RequestsScreen(),
-             OrdersScreen(),
+            RequestsScreen(),
+            OrdersScreen(),
           ],
         ),
       ),
     );
   }
 }
-
-

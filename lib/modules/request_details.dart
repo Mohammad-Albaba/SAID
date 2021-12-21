@@ -1,23 +1,18 @@
-
 import 'package:audio_wave/audio_wave.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:requset/shared/components/components.dart';
-import 'package:requset/shared/styles/icon_broken.dart';
 
 class RequestDetails extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold
-      (
-      appBar: AppBar
-        (
+    return Scaffold(
+      appBar: AppBar(
         backgroundColor: Colors.white,
         shadowColor: Colors.white.withOpacity(0.1),
         centerTitle: true,
         leading: IconButton(
-          onPressed: (){
+          onPressed: () {
             Navigator.pop(context);
           },
           icon: Icon(
@@ -29,30 +24,32 @@ class RequestDetails extends StatelessWidget {
         title: Text(
           '#123456',
           style: TextStyle(
-          color: Colors.black.withOpacity(0.8),
+            color: Colors.black.withOpacity(0.8),
             fontFamily: 'Jannah',
-
-          ),),
-        actions: <Widget>[
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0,vertical: 12.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.deepOrangeAccent,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            height: 24.0,
-            child: TextButton(
-            onPressed: () {},
-            child: const Text('Pending',
-              style: TextStyle(
-                fontFamily: 'Jannah',
-                  fontSize: 12.0,
-                  color: Colors.white),),
-      ),
           ),
         ),
-    ],
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.deepOrangeAccent,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              height: 24.0,
+              child: TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'Pending',
+                  style: TextStyle(
+                      fontFamily: 'Jannah',
+                      fontSize: 12.0,
+                      color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Container(
         color: Colors.white,
@@ -70,8 +67,8 @@ class RequestDetails extends StatelessWidget {
                         radius: 25.0,
                         child: CircleAvatar(
                           radius: 25.0,
-                          backgroundImage:
-                          NetworkImage('https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=338&ext=jpg'),
+                          backgroundImage: NetworkImage(
+                              'https://img.freepik.com/free-photo/cheerful-curly-business-girl-wearing-glasses_176420-206.jpg?size=338&ext=jpg'),
                         ),
                       ),
                       SizedBox(
@@ -87,11 +84,19 @@ class RequestDetails extends StatelessWidget {
                             ),
                             maxLines: 1,
                           ),
-                          SizedBox(height: 8.0,),
+                          SizedBox(
+                            height: 8.0,
+                          ),
                           Row(
                             children: [
-                              Icon(Icons.star,color: Colors.orangeAccent,size: 12.0,),
-                              SizedBox(width: 4.0,),
+                              Icon(
+                                Icons.star,
+                                color: Colors.orangeAccent,
+                                size: 12.0,
+                              ),
+                              SizedBox(
+                                width: 4.0,
+                              ),
                               Text(
                                 '4.5 (450)',
                                 style: TextStyle(
@@ -105,11 +110,14 @@ class RequestDetails extends StatelessWidget {
                         ],
                       ),
                       Spacer(),
-                      Icon(Icons.call,color: Colors.blue,size: 25.0,)
+                      Icon(
+                        Icons.call,
+                        color: Colors.blue,
+                        size: 25.0,
+                      )
                     ],
                   ),
                 ),
-
               ],
             ),
             myDivider(),
@@ -125,7 +133,9 @@ class RequestDetails extends StatelessWidget {
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: 8.0,),
+                  SizedBox(
+                    height: 8.0,
+                  ),
                   Text(
                     'Bring me a pizza form al tabon 2 salami medium size and coke 2  liter',
                     style: TextStyle(
@@ -135,14 +145,22 @@ class RequestDetails extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 32.0,),
+                  SizedBox(
+                    height: 32.0,
+                  ),
                   Row(
                     children: [
-                      Icon(Icons.play_arrow,size: 30,color: Colors.green,),
-                      SizedBox(width: 16.0,),
+                      Icon(
+                        Icons.play_arrow,
+                        size: 30,
+                        color: Colors.green,
+                      ),
+                      SizedBox(
+                        width: 16.0,
+                      ),
                       AudioWave(
-                        height: 23,
-                        spacing: 1.5,
+                        height: 25,
+                        spacing: 2.9,
                         animationLoop: 5,
                         bars: [
                           AudioWaveBar(height: 10, color: Colors.green),
@@ -219,7 +237,6 @@ class RequestDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-
                 ],
               ),
             ),
@@ -236,7 +253,9 @@ class RequestDetails extends StatelessWidget {
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(height: 8.0,),
+                  SizedBox(
+                    height: 8.0,
+                  ),
                   Text(
                     'Al senaah rayes st, louzon buildings 50/51',
                     style: TextStyle(
