@@ -36,7 +36,7 @@ class RequestDetails extends StatelessWidget {
                 color: Colors.deepOrangeAccent,
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              height: 24.0,
+              height: 25.0,
               child: TextButton(
                 onPressed: () {},
                 child: const Text(
@@ -160,6 +160,7 @@ class RequestDetails extends StatelessWidget {
                       ),
                       AudioWave(
                         height: 25,
+                        width: 260,
                         spacing: 2.9,
                         animationLoop: 5,
                         bars: [
@@ -218,21 +219,6 @@ class RequestDetails extends StatelessWidget {
                           AudioWaveBar(height: 70, color: Colors.green),
                           AudioWaveBar(height: 40),
                           AudioWaveBar(height: 20, color: Colors.green),
-                          AudioWaveBar(height: 10, color: Colors.green),
-                          AudioWaveBar(height: 30, color: Colors.green),
-                          AudioWaveBar(height: 70, color: Colors.green),
-                          AudioWaveBar(height: 40),
-                          AudioWaveBar(height: 20, color: Colors.green),
-                          AudioWaveBar(height: 20, color: Colors.green),
-                          AudioWaveBar(height: 10, color: Colors.green),
-                          AudioWaveBar(height: 30, color: Colors.green),
-                          AudioWaveBar(height: 70, color: Colors.green),
-                          AudioWaveBar(height: 40),
-                          AudioWaveBar(height: 20, color: Colors.green),
-                          AudioWaveBar(height: 10, color: Colors.green),
-                          AudioWaveBar(height: 30, color: Colors.green),
-                          AudioWaveBar(height: 70, color: Colors.green),
-                          AudioWaveBar(height: 40),
                         ],
                       ),
                     ],

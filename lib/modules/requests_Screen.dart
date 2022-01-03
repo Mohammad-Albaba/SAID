@@ -7,16 +7,11 @@ import 'package:requset/layout/cubit/cubit.dart';
 import 'package:requset/layout/cubit/states.dart';
 import 'package:requset/models/request_model.dart';
 import 'package:requset/modules/gmap.dart';
+import 'package:requset/modules/orders_Screen.dart';
 import 'package:requset/shared/components/components.dart';
 import 'package:requset/shared/components/constant.dart';
 
 class RequestsScreen extends StatefulWidget {
-  final double latitude;
-  final double longitude;
-  RequestsScreen({
-    this.latitude,
-    this.longitude,
-  });
   @override
   _RequestsScreenState createState() => _RequestsScreenState();
 }
@@ -24,7 +19,6 @@ class RequestsScreen extends StatefulWidget {
 class _RequestsScreenState extends State<RequestsScreen> {
   var needsController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -220,7 +214,10 @@ class _RequestsScreenState extends State<RequestsScreen> {
                             myDivider(),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  left: 16.0, right: 8.0, top: 16.0),
+                                left: 16.0,
+                                right: 8.0,
+                                top: 16.0,
+                              ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -235,7 +232,8 @@ class _RequestsScreenState extends State<RequestsScreen> {
                                   ),
                                   TextFormField(
                                     controller: TextEditingController(
-                                        text: placemarkName),
+                                      text: placemarkName.toString(),
+                                    ),
                                     maxLines: 2,
                                     cursorColor: Colors.black,
                                     keyboardType: TextInputType.text,
@@ -289,19 +287,76 @@ class _RequestsScreenState extends State<RequestsScreen> {
                         height: 56.0,
                         width: MediaQuery.of(context).size.width,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (formKey.currentState.validate()) {
                               if (state is! LoadingRequestState) {
-                                AppCubit.get(context).postRequest(
+                                await AppCubit.get(context).postRequest(
                                   deliveryNotes: needsController.text,
                                   dropLocation: DropLocation(
                                     name: placemarkName.toString(),
                                     coordinates: Coordinates(
-                                      lat: widget.latitude,
-                                      lng: widget.longitude,
+                                      lat: latitude,
+                                      lng: longitude,
                                     ),
                                   ),
                                 );
+                                if (state is SuccessRequestState) {
+                                  AlertDialog(
+                                    title: Stack(
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              height: 15.0,
+                                            ),
+                                            SvgPicture.asset(
+                                              'assets/icons/audio.svg',
+                                              height: 87,
+                                              width: 87,
+                                            ),
+                                            SizedBox(
+                                              height: 24.0,
+                                            ),
+                                            Text(
+                                              'your order placed successfully',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1,
+                                            ),
+                                            SizedBox(
+                                              height: 3.0,
+                                            ),
+                                            Text(
+                                              'Said is working for you',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText2,
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                navigateTo(
+                                                    context, OrdersScreen());
+                                              },
+                                              child: Center(
+                                                  child: Text(
+                                                'View order',
+                                                style: TextStyle(
+                                                  fontFamily: 'Jannah',
+                                                  color: Colors.white,
+                                                  fontSize: 14.0,
+                                                ),
+                                              )),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }
                               }
                             }
                           },

@@ -66,6 +66,8 @@ dependencies:
   geolocator: ^7.7.1
   location: ^4.3.0
   geocoding: ^2.0.1
+  just_audio: ^0.9.5
+  record: ^3.0.0
 
 
 dev_dependencies:

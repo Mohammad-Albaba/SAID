@@ -47,14 +47,14 @@ class AppCubit extends Cubit<AppStates> {
   void postRequest({
     @required String deliveryNotes,
     @required DropLocation dropLocation,
-  }) {
+  }) async {
     emit(LoadingRequestState());
     DioHelper.postData(url: REQUEST, token: token, data: {
-      'deliveryNotes': deliveryNotes,
-      'dropLocation': {
+      'delivery_notes': deliveryNotes,
+      'drop_location': {
         'name': dropLocation.name,
         'coordinates': dropLocation.coordinates,
-      }
+      },
     })
         .then((value) => {
               print('RequestData' + value.data.toString()),

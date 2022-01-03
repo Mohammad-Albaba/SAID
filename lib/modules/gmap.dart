@@ -183,6 +183,8 @@ class _GMAPState extends State<GMAP> {
   void _getUserLocation() async {
     position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
+    latitude = position.latitude;
+    longitude = position.longitude;
     print('location: ${position.latitude}');
     print('location: ${position.longitude}');
     placemark =
@@ -225,7 +227,11 @@ class _GMAPState extends State<GMAP> {
           infoWindow: InfoWindow(
               title: "${placemark[0].name}",
               snippet: "${placemark[0].street}",
-              onTap: () {}),
+              onTap: () {
+                setState(() {
+                  placemarkName = "${placemark[0].name}";
+                });
+              }),
           onTap: () {},
           icon: BitmapDescriptor.defaultMarker));
     });
@@ -266,13 +272,7 @@ class _GMAPState extends State<GMAP> {
             size: 20.0,
           ),
           onTap: () {
-            Navigator.pop(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => RequestsScreen(
-                          latitude: position.latitude,
-                          longitude: position.latitude,
-                        )));
+            Navigator.pop(context);
           },
         ),
       ),
@@ -297,6 +297,7 @@ class _GMAPState extends State<GMAP> {
                   ),
                   onMapCreated: _onMapCreated,
                   zoomGesturesEnabled: true,
+                  zoomControlsEnabled: false,
                   onCameraMove: _onCameraMove,
                   myLocationEnabled: true,
                   compassEnabled: true,
@@ -321,7 +322,30 @@ class _GMAPState extends State<GMAP> {
                               Colors.green),
                         ],
                       )),
-                )
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: 52,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RequestsScreen(),
+                            ));
+                      },
+                      child: Text(
+                        'Order Now!',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ]),
             ),
     );
