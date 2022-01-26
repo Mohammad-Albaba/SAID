@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class RequestModel {
   bool status;
   Data data;
@@ -24,6 +26,7 @@ class Data {
   Customer customer;
   DropLocation dropLocation;
   String deliveryNotes;
+  File recordVoice;
   int status;
   String createdAt;
 
@@ -32,6 +35,7 @@ class Data {
       this.customer,
       this.dropLocation,
       this.deliveryNotes,
+      this.recordVoice,
       this.status,
       this.createdAt});
 
@@ -44,6 +48,7 @@ class Data {
         ? new DropLocation.fromJson(json['drop_location'])
         : null;
     deliveryNotes = json['delivery_notes'];
+    recordVoice = json['record_voice'];
     status = json['status'];
     createdAt = json['created_at'];
   }
@@ -58,6 +63,7 @@ class Data {
       data['drop_location'] = this.dropLocation.toJson();
     }
     data['delivery_notes'] = this.deliveryNotes;
+    data['record_voice'] = this.recordVoice;
     data['status'] = this.status;
     data['created_at'] = this.createdAt;
     return data;

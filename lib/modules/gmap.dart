@@ -170,17 +170,19 @@ class _GMAPState extends State<GMAP> {
   Completer<GoogleMapController> controller1;
 
   static LatLng _initialPosition;
+
   final Set<Marker> _markers = {};
   static LatLng _lastMapPosition = _initialPosition;
   List<Placemark> placemark;
   Position position;
+
   @override
   void initState() {
     super.initState();
     _getUserLocation();
   }
 
-  void _getUserLocation() async {
+  Future<Position> _getUserLocation() async {
     position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     latitude = position.latitude;
@@ -202,6 +204,19 @@ class _GMAPState extends State<GMAP> {
   _onMapCreated(GoogleMapController controller) {
     setState(() {
       controller1.complete(controller);
+    });
+    _getUserLocation().then((value) {
+      controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: LatLng(
+              value.latitude,
+              value.longitude,
+            ),
+            zoom: 16.0,
+          ),
+        ),
+      );
     });
   }
 

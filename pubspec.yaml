@@ -68,7 +68,7 @@ dependencies:
   geocoding: ^2.0.1
   just_audio: ^0.9.5
   record: ^3.0.0
-
+  flutter_uploader: ^1.2.1
 
 dev_dependencies:
   flutter_test:

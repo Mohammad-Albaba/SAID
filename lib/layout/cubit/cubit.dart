@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,10 +49,12 @@ class AppCubit extends Cubit<AppStates> {
   void postRequest({
     @required String deliveryNotes,
     @required DropLocation dropLocation,
+    @required Future<File> recordVoice,
   }) async {
     emit(LoadingRequestState());
     DioHelper.postData(url: REQUEST, token: token, data: {
       'delivery_notes': deliveryNotes,
+      'record_voice': recordVoice,
       'drop_location': {
         'name': dropLocation.name,
         'coordinates': dropLocation.coordinates,
