@@ -45,6 +45,7 @@ class LoginCubit extends Cubit<LoginStates> {
       emit(CompleteLoginSuccessState(completeLoginModel));
     }).catchError((error) {
       emit(CompleteLoginErrorState(error.toString()));
+      print(token + 'token complete');
     });
   }
 }

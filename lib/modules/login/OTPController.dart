@@ -92,7 +92,7 @@ class _OTPControllerScreenState extends State<OTPControllerScreen> {
               key: 'token',
               value: "Bearer $timToken",
             ).then((value) => {
-                  token = state.loginModel.data.token,
+                  token = 'Bearer $timToken',
                 });
             if (state.loginModel.data.user.isNew == 0) {
               navigateAndFinish(context, HomeLayout());

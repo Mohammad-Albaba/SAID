@@ -23,7 +23,7 @@ class DioHelper {
     String token,
   }) async {
     dio.options.headers = {
-      'content-Type': 'application/json',
+      'accept': 'application/json',
       'lang': lang,
       'Authorization': token ?? '',
     };
@@ -41,7 +41,26 @@ class DioHelper {
     String token,
   }) async {
     dio.options.headers = {
-      'content-Type': 'application/json',
+      'accept': 'application/json',
+      'lang': lang,
+      'Authorization': token ?? '',
+    };
+    return dio.post(
+      url,
+      queryParameters: query ?? null,
+      data: data,
+    );
+  }
+
+  static Future<Response> postOrder({
+    @required String url,
+    @required FormData data,
+    Map<String, dynamic> query,
+    String lang = 'en',
+    String token,
+  }) async {
+    dio.options.headers = {
+      'accept': 'application/json',
       'lang': lang,
       'Authorization': token ?? '',
     };
@@ -60,7 +79,7 @@ class DioHelper {
     String token,
   }) async {
     dio.options.headers = {
-      'content-Type': 'application/json',
+      'accept': 'application/json',
       'lang': lang,
       'Authorization': token ?? '',
     };

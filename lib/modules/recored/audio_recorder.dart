@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:avatar_glow/avatar_glow.dart';
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:record/record.dart';
-import 'package:requset/shared/styles/colors.dart';
+import 'package:requset/shared/components/components.dart';
 
 class AudioRecorder extends StatefulWidget {
   final void Function(String path) onStop;
@@ -48,93 +51,56 @@ class _AudioRecorderState extends State<AudioRecorder> {
         return Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            _buildRecordStopControl(),
-            SizedBox(width: 20),
-            _buildPauseResumeControl(),
-            //SizedBox(width: 20),
-            // _buildText(),
+            AvatarGlow(
+              animate: _isRecording,
+              endRadius: 30.0,
+              showTwoGlows: true,
+              curve: Curves.easeInOutQuint,
+              duration: Duration(milliseconds: 2000),
+              repeatPauseDuration: Duration(milliseconds: 100),
+              repeat: true,
+              glowColor: Theme.of(context).primaryColor,
+              child: GestureDetector(
+                child: Icon(
+                  Icons.mic,
+                  color: Colors.blue,
+                  size: 28,
+                ),
+                onLongPress: _start,
+                onLongPressUp: _stop,
+                onLongPressCancel: () {
+                  showToast(
+                    text: 'Click at length',
+                    state: ToastStates.WARNING,
+                    toastLength: Toast.LENGTH_SHORT,
+                  );
+                },
+              ),
+            ),
           ],
         );
       },
     );
   }
 
-  Widget _buildRecordStopControl() {
-    Icon icon;
-
-    if (_isRecording || _isPaused) {
-      icon = const Icon(Icons.stop, color: ColorSecodaryIcon, size: 30);
-    } else {
-      final theme = Theme.of(context);
-      icon = Icon(Icons.mic, color: Colors.blue, size: 30);
-    }
-
-    return ClipOval(
-      child: Material(
-        child: InkWell(
-          child: Container(
-            width: 25,
-            height: 30,
-            child: icon,
-            color: Colors.white,
-          ),
-          onTap: () {
-            _isRecording ? _stop() : _start();
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPauseResumeControl() {
-    if (!_isRecording && !_isPaused) {
-      return const SizedBox.shrink();
-    }
-
-    Icon icon;
-
-    if (!_isPaused) {
-      icon = const Icon(Icons.pause, color: ColorSecodaryIcon, size: 30);
-    } else {
-      final theme = Theme.of(context);
-      icon = const Icon(Icons.play_arrow, color: ColorSecodaryIcon, size: 30);
-    }
-
-    return ClipOval(
-      child: Material(
-        child: InkWell(
-          child: Container(
-            width: 56,
-            height: 56,
-            child: icon,
-            color: Colors.white,
-          ),
-          onTap: () {
-            _isPaused ? _resume() : _pause();
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTimer() {
-    final String minutes = _formatNumber(_recordDuration ~/ 60);
-    final String seconds = _formatNumber(_recordDuration % 60);
-
-    return Text(
-      '$minutes : $seconds',
-      style: TextStyle(color: Colors.red),
-    );
-  }
-
-  String _formatNumber(int number) {
-    String numberStr = number.toString();
-    if (number < 10) {
-      numberStr = '0' + numberStr;
-    }
-
-    return numberStr;
-  }
+  // Widget _buildTimer() {
+  //   final String minutes = _formatNumber(_recordDuration ~/ 60);
+  //   final String seconds = _formatNumber(_recordDuration % 60);
+  //
+  //   return Text(
+  //     '$minutes : $seconds',
+  //     style: TextStyle(color: Colors.red),
+  //   );
+  // }
+  //
+  // String _formatNumber(int number) {
+  //   String numberStr = number.toString();
+  //   if (number < 10) {
+  //     numberStr = '0' + numberStr;
+  //   }
+  //
+  //   return numberStr;
+  // }
 
   Future<void> _start() async {
     try {
@@ -162,21 +128,6 @@ class _AudioRecorderState extends State<AudioRecorder> {
     widget.onStop(path);
 
     setState(() => _isRecording = false);
-  }
-
-  Future<void> _pause() async {
-    _timer?.cancel();
-    _ampTimer?.cancel();
-    await _audioRecorder.pause();
-
-    setState(() => _isPaused = true);
-  }
-
-  Future<void> _resume() async {
-    _startTimer();
-    await _audioRecorder.resume();
-
-    setState(() => _isPaused = false);
   }
 
   void _startTimer() {

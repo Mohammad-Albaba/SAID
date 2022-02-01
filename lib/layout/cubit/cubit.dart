@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,17 +51,27 @@ class AppCubit extends Cubit<AppStates> {
   void postRequest({
     @required String deliveryNotes,
     @required DropLocation dropLocation,
-    @required Future<File> recordVoice,
+    @required File recordVoice,
   }) async {
     emit(LoadingRequestState());
-    DioHelper.postData(url: REQUEST, token: token, data: {
-      'delivery_notes': deliveryNotes,
-      'record_voice': recordVoice,
-      'drop_location': {
-        'name': dropLocation.name,
-        'coordinates': dropLocation.coordinates,
-      },
-    })
+    String fileName = recordVoice.path.split('/').last;
+    DioHelper.postOrder(
+            url: REQUEST,
+            token: token,
+            data: FormData.fromMap({
+              'delivery_notes': deliveryNotes,
+              'drop_location': jsonEncode({
+                'name': dropLocation.name,
+                'coordinates': {
+                  'lat': dropLocation.coordinates.lat,
+                  'lng': dropLocation.coordinates.lng,
+                },
+              }),
+              'record_voice': await MultipartFile.fromFile(
+                recordVoice.path,
+                filename: fileName,
+              ),
+            }))
         .then((value) => {
               print('RequestData' + value.data.toString()),
               requestModel = RequestModel.fromJson(value.data),
@@ -67,6 +79,7 @@ class AppCubit extends Cubit<AppStates> {
             })
         .catchError((error) {
       emit(ErrorRequestState(error.toString()));
+      print(error.toString() + 'error');
     });
   }
 }

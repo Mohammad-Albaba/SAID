@@ -191,11 +191,14 @@ class _CompleteLoginScreenState extends State<CompleteLoginScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (state is! CompleteLoginLoadingState)
+                            if (state is! CompleteLoginLoadingState) {
                               LoginCubit.get(context).userCompleteLogin(
                                 name: nameController.text,
                               );
-                            navigateAndFinish(context, HomeLayout());
+                              if (state is CompleteLoginSuccessState) {
+                                navigateAndFinish(context, HomeLayout());
+                              }
+                            }
                             //   print('nameController' + nameController.text);
                           },
                           child: Center(

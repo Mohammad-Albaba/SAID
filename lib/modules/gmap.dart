@@ -173,7 +173,7 @@ class _GMAPState extends State<GMAP> {
 
   final Set<Marker> _markers = {};
   static LatLng _lastMapPosition = _initialPosition;
-  List<Placemark> placemark;
+  List<Placemark> place;
   Position position;
 
   @override
@@ -185,16 +185,17 @@ class _GMAPState extends State<GMAP> {
   Future<Position> _getUserLocation() async {
     position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    latitude = position.latitude;
-    longitude = position.longitude;
-    print('location: ${position.latitude}');
-    print('location: ${position.longitude}');
-    placemark =
+    // latitude = position.latitude;
+    // longitude = position.longitude;
+    // print('location: ${position.latitude}');
+    // print('location: ${position.longitude}');
+    List<Placemark> newPlace =
         await placemarkFromCoordinates(position.latitude, position.longitude);
     setState(() {
+      place = newPlace;
       _initialPosition = LatLng(position.latitude, position.longitude);
-      placemarkName = "${placemark[0].name}";
-      print('${placemark} + moh');
+      placemarkName = "${place.last.name}";
+      print('${place.last.name} + moh');
       print('$_lastMapPosition + Moh');
       // address =
       //     '${placemark.first.name.isNotEmpty ? placemark.first.name + ', ' : ''}${placemark.first.thoroughfare.isNotEmpty ? placemark.first.thoroughfare + ', ' : ''}${placemark.first.subLocality.isNotEmpty ? placemark.first.subLocality + ', ' : ''}${placemark.first.locality.isNotEmpty ? placemark.first.locality + ', ' : ''}${placemark.first.subAdministrativeArea.isNotEmpty ? placemark.first.subAdministrativeArea + ', ' : ''}${placemark.first.postalCode.isNotEmpty ? placemark.first.postalCode + ', ' : ''}${placemark.first.administrativeArea.isNotEmpty ? placemark.first.administrativeArea : ''}';
@@ -231,24 +232,28 @@ class _GMAPState extends State<GMAP> {
   }
 
   _onCameraMove(CameraPosition position) {
-    _lastMapPosition = position.target;
+    setState(() {
+      _lastMapPosition = position.target;
+    });
   }
 
   _onAddMarkerButtonPressed() {
     setState(() {
-      _markers.add(Marker(
-          markerId: MarkerId(_lastMapPosition.toString()),
-          position: _lastMapPosition,
-          infoWindow: InfoWindow(
-              title: "${placemark[0].name}",
-              snippet: "${placemark[0].street}",
-              onTap: () {
-                setState(() {
-                  placemarkName = "${placemark[0].name}";
-                });
-              }),
-          onTap: () {},
-          icon: BitmapDescriptor.defaultMarker));
+      _markers.add(
+        Marker(
+            markerId: MarkerId(_lastMapPosition.toString()),
+            position: _lastMapPosition,
+            infoWindow: InfoWindow(
+                title: "${place.last.name}",
+                snippet: "${place.last.street}",
+                onTap: () {
+                  setState(() {
+                    placemarkName = "${place.last.name}";
+                  });
+                }),
+            onTap: () {},
+            icon: BitmapDescriptor.defaultMarker),
+      );
     });
   }
 
@@ -304,7 +309,26 @@ class _GMAPState extends State<GMAP> {
           : Container(
               child: Stack(children: <Widget>[
                 GoogleMap(
-                  markers: _markers.toSet(),
+                  onTap: (LatLng latLng) async {
+                    _markers.add(Marker(
+                        markerId: MarkerId(_lastMapPosition.toString()),
+                        position: latLng));
+                    List<Placemark> newPlace = await placemarkFromCoordinates(
+                        latLng.latitude, latLng.longitude);
+                    setState(() {
+                      latitude = latLng.latitude;
+                      longitude = latLng.longitude;
+                      print('location: ${latLng.latitude}');
+                      print('location: ${latLng.longitude}');
+                      place = newPlace;
+                      _initialPosition =
+                          LatLng(latLng.latitude, latLng.longitude);
+                      placemarkName = "${place.last.name}";
+                      print('${place.last.name} + moh');
+                      print('$_lastMapPosition + Moh');
+                    });
+                  },
+                  markers: Set<Marker>.of(_markers),
                   mapType: _currentMapType,
                   initialCameraPosition: CameraPosition(
                     target: _initialPosition,

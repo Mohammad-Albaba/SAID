@@ -31,6 +31,7 @@ void main() async {
   //method to choose of start widget
   Widget widget;
   token = CacheHelper.getData(key: 'token');
+  print(token + 'token main');
   if (token != null) {
     print('home layout');
     widget = HomeLayout();
