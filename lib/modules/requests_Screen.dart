@@ -9,11 +9,11 @@ import 'package:requset/layout/cubit/states.dart';
 import 'package:requset/models/request_model.dart';
 import 'package:requset/modules/recored/audio_player.dart';
 import 'package:requset/modules/recored/audio_recorder.dart';
+import 'package:requset/modules/request_details.dart';
 import 'package:requset/shared/components/components.dart';
 import 'package:requset/shared/components/constant.dart';
 
 import 'gmap.dart';
-import 'orders_Screen.dart';
 
 class RequestsScreen extends StatefulWidget {
   @override
@@ -36,7 +36,68 @@ class _RequestsScreenState extends State<RequestsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is SuccessRequestState) {
+          return showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: Stack(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      Container(
+                        width: 87.0,
+                        height: 87.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                        ),
+                        child: Image(
+                          image: AssetImage('assets/images/ok.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 24.0,
+                      ),
+                      Text(
+                        'your order placed successfully',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      SizedBox(
+                        height: 3.0,
+                      ),
+                      Text(
+                        'Said is working for you',
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          navigateTo(context, RequestDetails());
+                        },
+                        child: Center(
+                            child: Text(
+                          'View order',
+                          style: TextStyle(
+                            fontFamily: 'Jannah',
+                            color: Colors.white,
+                            fontSize: 14.0,
+                          ),
+                        )),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        }
+      },
       builder: (context, state) {
         return Form(
           key: formKey,
@@ -344,76 +405,6 @@ class _RequestsScreenState extends State<RequestsScreen> {
                                     ),
                                   ),
                                   recordVoice: record,
-                                );
-                              }
-                              if (state is SuccessRequestState) {
-                                return showDialog<String>(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      AlertDialog(
-                                    title: Stack(
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            SizedBox(
-                                              height: 15.0,
-                                            ),
-                                            Container(
-                                              width: 87.0,
-                                              height: 87.0,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Theme.of(context)
-                                                    .scaffoldBackgroundColor,
-                                              ),
-                                              child: Image(
-                                                image: AssetImage(
-                                                    'assets/images/ok.jpg'),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 24.0,
-                                            ),
-                                            Text(
-                                              'your order placed successfully',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1,
-                                            ),
-                                            SizedBox(
-                                              height: 3.0,
-                                            ),
-                                            Text(
-                                              'Said is working for you',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText2,
-                                            ),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                navigateTo(
-                                                    context, OrdersScreen());
-                                              },
-                                              child: Center(
-                                                  child: Text(
-                                                'View order',
-                                                style: TextStyle(
-                                                  fontFamily: 'Jannah',
-                                                  color: Colors.white,
-                                                  fontSize: 14.0,
-                                                ),
-                                              )),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
                                 );
                               }
                             }

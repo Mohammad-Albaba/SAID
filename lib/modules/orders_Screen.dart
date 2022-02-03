@@ -1,22 +1,62 @@
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progress_indicator/progress_indicator.dart';
+import 'package:requset/layout/cubit/cubit.dart';
+import 'package:requset/layout/cubit/states.dart';
 import 'package:requset/modules/request_details.dart';
 import 'package:requset/shared/components/components.dart';
 
-class OrdersScreen extends StatelessWidget {
+class OrdersScreen extends StatefulWidget {
+  @override
+  State<OrdersScreen> createState() => _OrdersScreenState();
+}
+
+class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: ListView.separated(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) => buildOrder(context),
-        separatorBuilder: (context, index) => SizedBox(
-          height: 0.0,
-        ),
-        itemCount: 3,
-      ),
+    return BlocConsumer<AppCubit, AppStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return Scaffold(
+          body: SafeArea(
+            child: Container(
+              color: Colors.white,
+              child: ConditionalBuilder(
+                //condition >>  need  edit
+                condition: state is! LoadingGetOrdersState,
+                builder: (context) => ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) => buildOrder(context),
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: 0.0,
+                  ),
+                  itemCount: 3,
+                ),
+                fallback: (context) => Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image(
+                        image: AssetImage('assets/images/empty_order'),
+                      ),
+                      Text(
+                        'Don\'t have any order yet',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 

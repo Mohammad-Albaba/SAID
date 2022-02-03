@@ -3,7 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:requset/shared/components/components.dart';
 
-class RequestDetails extends StatelessWidget {
+class RequestDetails extends StatefulWidget {
+  @override
+  State<RequestDetails> createState() => _RequestDetailsState();
+}
+
+class _RequestDetailsState extends State<RequestDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

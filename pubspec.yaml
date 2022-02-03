@@ -70,7 +70,6 @@ dependencies:
   record: ^3.0.0
   avatar_glow: ^2.0.2
   long_press_preview: ^0.0.7
-  flutter_uploader: ^1.2.1
 
 dev_dependencies:
   flutter_test:

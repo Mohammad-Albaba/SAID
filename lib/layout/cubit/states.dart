@@ -27,3 +27,12 @@ class ErrorRequestState extends AppStates {
   final String error;
   ErrorRequestState(this.error);
 }
+
+class LoadingGetOrdersState extends AppStates {}
+
+class SuccessGetOrdersState extends AppStates {}
+
+class ErrorGetOrdersState extends AppStates {
+  final String error;
+  ErrorGetOrdersState(this.error);
+}

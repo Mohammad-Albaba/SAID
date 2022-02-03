@@ -22,7 +22,7 @@ void main() async {
 
   // firebaseToken = await FirebaseAuth.instance.currentUser.getIdToken();
   // print('FirebaseToken ' + firebaseToken);
-  // CacheHelper.putData(key: 'firebaseToken', value: firebaseToken);
+  // CacheHelper.putData(key: 'firebaseToken', value: firebaseToken);`
 
   fcmToken = await FirebaseMessaging.instance.getToken();
   print('FcmToken ' + fcmToken);

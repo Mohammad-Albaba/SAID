@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class RequestModel {
   bool status;
   Data data;
@@ -26,7 +24,7 @@ class Data {
   Customer customer;
   DropLocation dropLocation;
   String deliveryNotes;
-  File recordVoice;
+  String recordVoice;
   int status;
   String createdAt;
 
