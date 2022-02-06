@@ -59,10 +59,9 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => LoginCubit(),
         ),
         BlocProvider(
-          create: (BuildContext context) => AppCubit()
-            ..getUserData()
-            ..profileModel,
-        ),
+            create: (BuildContext context) => AppCubit()
+              ..getUserData()
+              ..profileModel),
       ],
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},

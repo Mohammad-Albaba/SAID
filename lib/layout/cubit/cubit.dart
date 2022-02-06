@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:requset/layout/cubit/states.dart';
 import 'package:requset/models/profile_model.dart';
@@ -82,4 +83,8 @@ class AppCubit extends Cubit<AppStates> {
       print(error.toString() + 'error');
     });
   }
+
+  double latitude;
+  double longitude;
+  String placemarkName = '';
 }

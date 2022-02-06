@@ -11,9 +11,8 @@ import 'package:requset/modules/recored/audio_player.dart';
 import 'package:requset/modules/recored/audio_recorder.dart';
 import 'package:requset/modules/request_details.dart';
 import 'package:requset/shared/components/components.dart';
-import 'package:requset/shared/components/constant.dart';
 
-import 'gmap.dart';
+import 'map/gmap.dart';
 
 class RequestsScreen extends StatefulWidget {
   @override
@@ -99,6 +98,7 @@ class _RequestsScreenState extends State<RequestsScreen> {
         }
       },
       builder: (context, state) {
+        AppCubit cubit = AppCubit.get(context);
         return Form(
           key: formKey,
           child: AvoidKeyboard(
@@ -337,7 +337,7 @@ class _RequestsScreenState extends State<RequestsScreen> {
                                   ),
                                   TextFormField(
                                     controller: TextEditingController(
-                                      text: placemarkName.toString(),
+                                      text: cubit.placemarkName.toString(),
                                     ),
                                     maxLines: 2,
                                     cursorColor: Colors.black,
@@ -398,10 +398,10 @@ class _RequestsScreenState extends State<RequestsScreen> {
                                 await AppCubit.get(context).postRequest(
                                   deliveryNotes: needsController.text,
                                   dropLocation: DropLocation(
-                                    name: placemarkName.toString(),
+                                    name: cubit.placemarkName.toString(),
                                     coordinates: Coordinates(
-                                      lat: latitude,
-                                      lng: longitude,
+                                      lat: cubit.latitude,
+                                      lng: cubit.longitude,
                                     ),
                                   ),
                                   recordVoice: record,
