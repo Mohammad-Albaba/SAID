@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:requset/layout/home_layout.dart';
-import 'package:requset/modules/profile_Screen.dart';
+import 'package:requset/modules/profile/profile_Screen.dart';
 import 'package:requset/shared/components/components.dart';
 import 'package:requset/shared/styles/colors.dart';
 

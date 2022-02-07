@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progress_indicator/progress_indicator.dart';
 import 'package:requset/layout/cubit/cubit.dart';
 import 'package:requset/layout/cubit/states.dart';
-import 'package:requset/modules/request_details.dart';
+import 'package:requset/modules/request/request_details.dart';
 import 'package:requset/shared/components/components.dart';
 
 class OrdersScreen extends StatefulWidget {

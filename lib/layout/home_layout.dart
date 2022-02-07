@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:requset/modules/notification_Screen.dart';
-import 'package:requset/modules/orders_Screen.dart';
-import 'package:requset/modules/profile_Screen.dart';
-import 'package:requset/modules/requests_Screen.dart';
+import 'package:requset/modules/notifications/notification_Screen.dart';
+import 'package:requset/modules/orders/orders_Screen.dart';
+import 'package:requset/modules/profile/profile_Screen.dart';
+import 'package:requset/modules/request/requests_Screen.dart';
 import 'package:requset/shared/components/components.dart';
 
 class HomeLayout extends StatefulWidget {

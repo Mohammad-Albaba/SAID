@@ -7,12 +7,12 @@ import 'package:just_audio/just_audio.dart' as ap;
 import 'package:requset/layout/cubit/cubit.dart';
 import 'package:requset/layout/cubit/states.dart';
 import 'package:requset/models/request_model.dart';
+import 'package:requset/modules/map/gmap.dart';
 import 'package:requset/modules/recored/audio_player.dart';
 import 'package:requset/modules/recored/audio_recorder.dart';
-import 'package:requset/modules/request_details.dart';
+import 'package:requset/modules/request/request_details.dart';
 import 'package:requset/shared/components/components.dart';
 
-import 'map/gmap.dart';
 
 class RequestsScreen extends StatefulWidget {
   @override

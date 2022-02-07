@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'modules/orders_Screen.dart';
-import 'modules/requests_Screen.dart';
+import 'modules/orders/orders_Screen.dart';
+import 'modules/request/requests_Screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

@@ -6,7 +6,7 @@ import 'package:requset/layout/cubit/cubit.dart';
 import 'package:requset/layout/cubit/states.dart';
 import 'package:requset/layout/home_layout.dart';
 import 'package:requset/modules/login/loginScreen.dart';
-import 'package:requset/modules/notification_Screen.dart';
+import 'package:requset/modules/notifications/notification_Screen.dart';
 import 'package:requset/shared/components/components.dart';
 import 'package:requset/shared/components/constant.dart';
 import 'package:requset/shared/network/local/cache_helper.dart';
