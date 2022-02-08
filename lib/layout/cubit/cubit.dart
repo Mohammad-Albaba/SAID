@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:requset/layout/cubit/states.dart';
+import 'package:requset/models/order_model.dart';
 import 'package:requset/models/profile_model.dart';
 import 'package:requset/models/request_model.dart';
 import 'package:requset/shared/components/constant.dart';
@@ -87,4 +88,20 @@ class AppCubit extends Cubit<AppStates> {
   double latitude;
   double longitude;
   String placemarkName = '';
+
+  OrderModel orderModel;
+  void getOrders(){
+    emit(LoadingGetOrdersState());
+    DioHelper.getData(
+        url: ORDERS,
+        token: token,
+    ).then((value){
+      orderModel = OrderModel.fromJson(value.data);
+      emit(SuccessGetOrdersState());
+    }).catchError((error){
+      print(error.toString());
+      emit(ErrorGetOrdersState(error.toString()));
+    });
+  }
+
 }
