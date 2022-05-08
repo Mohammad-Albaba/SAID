@@ -90,18 +90,29 @@ class AppCubit extends Cubit<AppStates> {
   String placemarkName = '';
 
   OrderModel orderModel;
-  void getOrders(){
+  int page = 1;
+  List<DataOrder> list = [];
+  List<DataOrder> newList = [];
+  Future<OrderModel> getOrders()async{
     emit(LoadingGetOrdersState());
     DioHelper.getData(
-        url: ORDERS,
+        url: '$ORDERS?page=$page',
         token: token,
     ).then((value){
       orderModel = OrderModel.fromJson(value.data);
+      list.addAll(orderModel.data);
+      newList = list;
+      newList.addAll(list);
+      page++;
       emit(SuccessGetOrdersState());
     }).catchError((error){
       print(error.toString());
       emit(ErrorGetOrdersState(error.toString()));
     });
   }
+// sort code is solve problem
+//newList = list;
+// newList.addAll(list);
+//
 
 }

@@ -1,6 +1,6 @@
 class OrderModel {
   bool status;
-  List<Data> data;
+  List<DataOrder> data;
   Meta meta;
 
   OrderModel({this.status, this.data, this.meta});
@@ -8,9 +8,9 @@ class OrderModel {
   OrderModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <DataOrder>[];
       json['data'].forEach((v) {
-        data.add(new Data.fromJson(v));
+        data.add(new DataOrder.fromJson(v));
       });
     }
     meta = json['meta'] != null ? new Meta.fromJson(json['meta']) : null;
@@ -29,7 +29,7 @@ class OrderModel {
   }
 }
 
-class Data {
+class DataOrder {
   int id;
   Customer customer;
   Null driver;
@@ -39,7 +39,7 @@ class Data {
   int status;
   String createdAt;
 
-  Data(
+  DataOrder(
       {this.id,
         this.customer,
         this.driver,
@@ -49,7 +49,7 @@ class Data {
         this.status,
         this.createdAt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataOrder.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     customer = json['customer'] != null
         ? new Customer.fromJson(json['customer'])

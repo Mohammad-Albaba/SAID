@@ -31,7 +31,6 @@ class ProfileScreen extends StatelessWidget {
         } catch (error) {
           error.toString();
         }
-
         return ConditionalBuilder(
           condition: AppCubit.get(context).profileModel != null,
           builder: (context) => AvoidKeyboard(
